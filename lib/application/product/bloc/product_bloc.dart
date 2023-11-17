@@ -19,16 +19,16 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       
         await event.when(started: () async {
 
-          debugPrint('flow productBloc running when event start() triggered');
+          debugPrint('ProductBloc running when event started');
           emit(ProductState.initial());
           emit(state.copyWith(isLoading: true));
           var response = await productRepository.getData();
-          
+
           Either<ProductFailure, List<ProductItem>> either = response.match((l) => left(l), (r) => right(r));
           response.fold((l) {
-            debugPrint('flow productBloc failed to get data');
+            debugPrint('ProductBloc failed to get data');
           }, (r) {
-              debugPrint('flow productBloc success to load data');
+              debugPrint('ProductBloc success to load data');
               emit(state.copyWith(item: r, isLoading: false, optionFailureOrSuccess: optionOf(either)));
           });
           

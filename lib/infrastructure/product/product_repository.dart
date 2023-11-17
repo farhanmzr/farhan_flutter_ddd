@@ -29,11 +29,10 @@ class ProductRepository implements IProductRepository {
       if (datas.isNotEmpty) {
         List<ProductItem> items =
         List<ProductItem>.from(datas.map((e) => ProductItem.fromJson(e))).toList();
-        debugPrint('flow ProductRepository Success to maaping json into list ProductItem'); 
-        debugPrint('flow ProductRepository END'); 
+        debugPrint('ProductRepository Success to mapping json into list ProductItem'); 
         return right(items);
       }
-      debugPrint('flow ProductRepository Fail to maaping json into list ProductItem'); 
+      debugPrint('ProductRepository Failed to mapping json into list ProductItem'); 
       return left(const ProductFailure.noData());
 
     });

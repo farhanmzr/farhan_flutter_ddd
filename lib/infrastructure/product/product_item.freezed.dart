@@ -25,7 +25,7 @@ mixin _$ProductItem {
   String get title => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
+  List<String>? get images => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +44,7 @@ abstract class $ProductItemCopyWith<$Res> {
       String title,
       double price,
       String description,
-      String image});
+      List<String>? images});
 }
 
 /// @nodoc
@@ -64,7 +64,7 @@ class _$ProductItemCopyWithImpl<$Res, $Val extends ProductItem>
     Object? title = null,
     Object? price = null,
     Object? description = null,
-    Object? image = null,
+    Object? images = freezed,
   }) {
     return _then(_value.copyWith(
       ids: null == ids
@@ -83,10 +83,10 @@ class _$ProductItemCopyWithImpl<$Res, $Val extends ProductItem>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -104,7 +104,7 @@ abstract class _$$ProductItemImplCopyWith<$Res>
       String title,
       double price,
       String description,
-      String image});
+      List<String>? images});
 }
 
 /// @nodoc
@@ -122,7 +122,7 @@ class __$$ProductItemImplCopyWithImpl<$Res>
     Object? title = null,
     Object? price = null,
     Object? description = null,
-    Object? image = null,
+    Object? images = freezed,
   }) {
     return _then(_$ProductItemImpl(
       ids: null == ids
@@ -141,10 +141,10 @@ class __$$ProductItemImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -157,8 +157,9 @@ class _$ProductItemImpl extends _ProductItem {
       required this.title,
       required this.price,
       required this.description,
-      required this.image})
-      : super._();
+      required final List<String>? images})
+      : _images = images,
+        super._();
 
   factory _$ProductItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductItemImplFromJson(json);
@@ -172,12 +173,19 @@ class _$ProductItemImpl extends _ProductItem {
   final double price;
   @override
   final String description;
+  final List<String>? _images;
   @override
-  final String image;
+  List<String>? get images {
+    final value = _images;
+    if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ProductItem(ids: $ids, title: $title, price: $price, description: $description, image: $image)';
+    return 'ProductItem(ids: $ids, title: $title, price: $price, description: $description, images: $images)';
   }
 
   @override
@@ -190,13 +198,13 @@ class _$ProductItemImpl extends _ProductItem {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.image, image) || other.image == image));
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, ids, title, price, description, image);
+  int get hashCode => Object.hash(runtimeType, ids, title, price, description,
+      const DeepCollectionEquality().hash(_images));
 
   @JsonKey(ignore: true)
   @override
@@ -218,7 +226,7 @@ abstract class _ProductItem extends ProductItem {
       required final String title,
       required final double price,
       required final String description,
-      required final String image}) = _$ProductItemImpl;
+      required final List<String>? images}) = _$ProductItemImpl;
   _ProductItem._() : super._();
 
   factory _ProductItem.fromJson(Map<String, dynamic> json) =
@@ -234,7 +242,7 @@ abstract class _ProductItem extends ProductItem {
   @override
   String get description;
   @override
-  String get image;
+  List<String>? get images;
   @override
   @JsonKey(ignore: true)
   _$$ProductItemImplCopyWith<_$ProductItemImpl> get copyWith =>
